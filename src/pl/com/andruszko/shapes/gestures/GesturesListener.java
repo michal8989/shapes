@@ -29,33 +29,32 @@ public class GesturesListener implements View.OnTouchListener, OnGestureListener
 		mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
 	}
 	
-    public boolean onTouchEvent(MotionEvent event){
-    	mScaleDetector.onTouchEvent(event);
-	    mDetector.onTouchEvent(event);
-	    mRotationDetector.onTouchEvent(event);
-	    return true;
-    }
+	public boolean onTouchEvent(MotionEvent event){
+    		mScaleDetector.onTouchEvent(event);
+		mDetector.onTouchEvent(event);
+		mRotationDetector.onTouchEvent(event);
+		return true;
+    	}
 		
 	class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
 		@Override
 		public boolean onScale(ScaleGestureDetector detector) {
-        	if(mListener != null) {
-    			mListener.onScale(detector);
-    		}
+	        	if(mListener != null) {
+	    			mListener.onScale(detector);
+	    		}
 			return true;
 		}
 	}
     
-    class GestureListener extends GestureDetector.SimpleOnGestureListener {
-
-        @Override
+    	class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        	@Override
 		public boolean onDoubleTap(MotionEvent event) {        
-        	if(mListener != null) {
-    			mListener.onDoubleTap(event);
-    		}
-        	return super.onDoubleTap(event);
+	        	if(mListener != null) {
+	    			mListener.onDoubleTap(event);
+	    		}
+        		return super.onDoubleTap(event);
 		}
-    }
+    	}
 
 	@Override
 	public boolean onDoubleTap(MotionEvent event) {
