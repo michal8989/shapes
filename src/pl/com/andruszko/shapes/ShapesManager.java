@@ -33,13 +33,13 @@ public class ShapesManager implements IOnAnimationEnds {
 		suckInAnimation = new SuckInAnimation();
 	        suckInAnimation.addOnAnimationEndsListener(new IOnAnimationEnds() {
 				
-				@Override
-				public void onAnimationEnds(Square square) {
-					synchronized(mSquares) {
-						getSquares().remove(square);
-					}
+			@Override
+			public void onAnimationEnds(Square square) {
+				synchronized(mSquares) {
+					getSquares().remove(square);
 				}
-			});        
+			}
+		});        
 	}
 	
 	public BlackHole getBlackHole() {
@@ -96,9 +96,9 @@ public class ShapesManager implements IOnAnimationEnds {
 	public void loadJSONSquares(String filename) {
 		
 		try {
-		String jsonLocation = AssetsUtility.AssetJSONFile(mContext, filename);
-		JSONObject jsonObject = new JSONObject(jsonLocation);
-		JSONArray jsonArray = (JSONArray) jsonObject.getJSONArray("squares");
+			String jsonLocation = AssetsUtility.AssetJSONFile(mContext, filename);
+			JSONObject jsonObject = new JSONObject(jsonLocation);
+			JSONArray jsonArray = (JSONArray) jsonObject.getJSONArray("squares");
 			for(int i = 0 ;i < jsonArray.length(); i++) {
 				JSONObject jb = (JSONObject) jsonArray.get(i);
 				Square tmp = new Square(jb.getInt("x"),jb.getInt("y"),jb.getInt("size"));
@@ -106,7 +106,7 @@ public class ShapesManager implements IOnAnimationEnds {
 				this.addSquare(tmp);
 			}
 		} catch (JSONException e) {
-		        e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	
@@ -116,36 +116,35 @@ public class ShapesManager implements IOnAnimationEnds {
 		
 		if(mBlackHole != null) {
 			mPaint.setColor(Color.BLACK);
-    		canvas.drawCircle((mBlackHole.left + mBlackHole.getSize() / 2), (mBlackHole.top + mBlackHole.getSize() / 2), mBlackHole.getSize() /2, mPaint);
+    			canvas.drawCircle((mBlackHole.left + mBlackHole.getSize() / 2), (mBlackHole.top + mBlackHole.getSize() / 2), mBlackHole.getSize() /2, mPaint);
 		}
 		
 		synchronized(mSquares) {
 			//for loop optimization
 			int size = mSquares.size();
 			for(int i = (size - 1);i >= 0; i--) {
-	    		canvas.save();
-	    		Square sqr = mSquares.get(i);
-	    		sqr.invalidateAnimations(mContext);
-	    		canvas.rotate(sqr.getRotation(),sqr.centerX(),sqr.centerY());
-	    		mPaint.setColor(sqr.getColor());
-	    		canvas.drawRect(sqr, mPaint);
-	    		canvas.restore();
-	    	}		
+		    		canvas.save();
+		    		Square sqr = mSquares.get(i);
+		    		sqr.invalidateAnimations(mContext);
+		    		canvas.rotate(sqr.getRotation(),sqr.centerX(),sqr.centerY());
+		    		mPaint.setColor(sqr.getColor());
+		    		canvas.drawRect(sqr, mPaint);
+		    		canvas.restore();
+	    		}		
 		}
 	}
 	
-    public Square getSquareByXY(float x, float y) {
-        
-	  	  if(getSquares().size() > 0){
-			  for(int i = 0; i < getSquares().size(); i++) {
-		    	  Square sqr = getSquares().get(i);
-		    	  if(sqr.contains(x, y)) {
-		    		  return sqr;
-		    	  }
-			  }
-		  }
+	public Square getSquareByXY(float x, float y) {
+		if(getSquares().size() > 0){
+			for(int i = 0; i < getSquares().size(); i++) {
+				Square sqr = getSquares().get(i);
+			    	if(sqr.contains(x, y)) {
+			    		return sqr;
+			    	}
+			}
+		}
 	  return null;    		
-  }	
+    	}	
 
 	public void blacHoleSuckGrabbedElement() {
 		getHoldedSquare().setAnimation(suckInAnimation);		
