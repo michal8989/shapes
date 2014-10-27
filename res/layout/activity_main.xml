@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.com.andruszko.shapes.MainActivity" >
+
+    <pl.com.andruszko.shapes.DrawView
+        android:id="@+id/drawView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btSuckIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/drawView"
+        android:layout_margin="10dp"
+        android:text="@string/suck_in" />
+
+    <Button
+        android:id="@+id/btAddShape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btSuckIn"
+        android:layout_alignRight="@+id/drawView"
+        android:layout_marginRight="10dp"
+        android:text="@string/add_shape" />
+
+</RelativeLayout>
