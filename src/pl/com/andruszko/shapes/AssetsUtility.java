@@ -18,7 +18,6 @@ public class AssetsUtility {
 	        is.close();
 	        json = new String(buffer, "UTF-8");
 
-
 	    } catch (IOException ex) {
 	        ex.printStackTrace();
 	        return null;
